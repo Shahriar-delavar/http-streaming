@@ -747,9 +747,7 @@ class VhsHandler extends Component {
       return;
     }
 
-    this.mediaSourceUrl_ = window.URL.createObjectURL(this.masterPlaylistController_.mediaSource);
-
-    this.tech_.src(this.mediaSourceUrl_);
+    this.tech_.src(window.URL.createObjectURL(this.masterPlaylistController_.mediaSource));
   }
 
   /**
@@ -853,11 +851,6 @@ class VhsHandler extends Component {
     // don't check this.tech_.hls as it will log a deprecated warning
     if (this.tech_) {
       delete this.tech_.hls;
-    }
-
-    if (this.mediaSourceUrl_ && window.URL.revokeObjectURL) {
-      window.URL.revokeObjectURL(this.mediaSourceUrl_);
-      this.mediaSourceUrl_ = null;
     }
 
     super.dispose();
